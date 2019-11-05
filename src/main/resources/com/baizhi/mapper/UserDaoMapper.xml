@@ -1,0 +1,11 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd" >
+<mapper namespace="com.baizhi.dao.UserDao">
+
+    <!--根据性别和年份查询某一年各个月份注册的用户数量-->
+    <select id="findRegistCountBySexAndYear" resultType="com.baizhi.entity.UserRegistCount">
+        select MONTH(create_date) as month,COUNT(id) as count from t_user
+        where sex = #{sex} AND YEAR(create_date)= #{year}  GROUP BY MONTH(create_date)
+    </select>
+
+</mapper>
