@@ -1,11 +1,8 @@
 package com.baizhi;
 
-import com.baizhi.controller.AdminController;
 import com.baizhi.controller.UserController;
 import com.baizhi.dao.AdminDao;
-import com.baizhi.entity.Admin;
 import com.baizhi.service.BannerService;
-import com.baizhi.utils.alidayu.SendPhoneMessage;
 import org.junit.jupiter.api.Test;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.test.context.SpringBootTest;
@@ -28,11 +25,24 @@ public class TestAdmin {
     private AdminDao adminDao;
     @Autowired
     private BannerService bannerService;
+    @Autowired
+    private UserController userController;
 
     @Test
     public void test(){
-        Admin sky = adminDao.selectOne(new Admin().setUsername("sky"));
-        System.out.println(sky);
+//        Admin sky = adminDao.selectOne(new Admin().setUsername("sky"));
+//        System.out.println(sky);
+
+//        redisTemplate.opsForValue().set("name","zhangsan");
+//        Object name = redisTemplate.opsForValue().get("name");
+//        System.out.println(name);
+
+//        stringRedisTemplate.opsForValue().set("name","lisi");
+//        String name = stringRedisTemplate.opsForValue().get("name");
+//        System.out.println(name);
+
+        stringRedisTemplate.opsForValue().set("xxxx", "xxxx");
+
     }
 
    /* @Test
@@ -76,12 +86,12 @@ public class TestAdmin {
    @Test
    public void testSendMessage(){
        //String [] s = {"13331025260","15261869980"};
-       UserController userController = new UserController();
+       //UserController userController = new UserController();
        try {
-           Integer random = (int) (((Math.random() * 9) + 1) * 100000);
-           String str = random.toString();
-           System.out.println(str);
-           userController.sendPhoneMessageCode("13331025260");
+//           Integer random = (int) (((Math.random() * 9) + 1) * 100000);
+//           String str = random.toString();
+//           System.out.println(str);
+           userController.sendPhoneMessageCode("15010102217");
        } catch (Exception e) {
            e.printStackTrace();
        }

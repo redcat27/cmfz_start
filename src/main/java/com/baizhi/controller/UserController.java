@@ -11,7 +11,6 @@ import com.aliyuncs.profile.DefaultProfile;
 import com.aliyuncs.profile.IClientProfile;
 import com.baizhi.entity.User;
 import com.baizhi.service.UserService;
-import com.baizhi.utils.ApplicationContextUtils;
 import org.apache.poi.ss.usermodel.Workbook;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.data.redis.core.RedisTemplate;
@@ -20,14 +19,12 @@ import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.ResponseBody;
 
-import javax.annotation.Resource;
 import javax.servlet.http.HttpServletResponse;
 import java.text.SimpleDateFormat;
 import java.util.Date;
 import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
-import java.util.concurrent.TimeUnit;
 
 @Controller
 @RequestMapping("user")
@@ -36,6 +33,8 @@ public class UserController {
     private UserService userService;
     @Autowired
     private RedisTemplate<String,String> redisTemplate;
+    @Autowired
+    private StringRedisTemplate stringRedisTemplate;
 
     /**
      * 根据starId查询一个明星下有哪些用户
@@ -165,9 +164,8 @@ public class UserController {
         if(sendSmsResponse.getCode() != null && sendSmsResponse.getCode().equals("OK")) {
 //请求成功
             System.out.println("短信发送成功");
-            StringRedisTemplate stringRedisTemplate =
-                    (StringRedisTemplate) ApplicationContextUtils.getBean(StringRedisTemplate.class);
-            stringRedisTemplate.opsForValue().set(phone,code,60, TimeUnit.SECONDS);
+            stringRedisTemplate.opsForValue().set("zzzzz", "xxxx");
+
 
         }
    }
