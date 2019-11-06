@@ -1,5 +1,6 @@
 package com.baizhi.service;
 
+import com.baizhi.annotation.RedisCache;
 import com.baizhi.dao.BannerDao;
 import com.baizhi.entity.Banner;
 import org.apache.ibatis.session.RowBounds;
@@ -31,6 +32,7 @@ public class BannerServiceImpl implements BannerService {
      */
     @Transactional(propagation = Propagation.SUPPORTS)
     @Override
+    @RedisCache
     public Map<String, Object> findAllByPage(Integer page, Integer rows) {
         Map<String, Object> map = new HashMap<>();
         RowBounds rowBounds = new RowBounds((page - 1) * rows, rows);
