@@ -24,5 +24,8 @@ spring:
       pool:
         max-active: 8
         max-wait: -1
+  data:
+    elasticsearch:
+      cluster-nodes: 192.168.161.20:9300
 mybatis:
   mapper-locations: com/baizhi/mapper/*.xml

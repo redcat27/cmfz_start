@@ -1,3 +1,4 @@
+<%@ taglib prefix="shiro" uri="http://shiro.apache.org/tags" %>
 <%@page pageEncoding="UTF-8" contentType="text/html; UTF-8" isELIgnored="false" %>
 <!doctype html>
 <html lang="en">
@@ -17,7 +18,7 @@
     <script charset="utf-8" src="${pageContext.request.contextPath}/kindeditor/kindeditor-all-min.js"></script>
     <script charset="utf-8" src="${pageContext.request.contextPath}/kindeditor/lang/zh-CN.js"></script>
     <script src="${pageContext.request.contextPath}/echarts/echarts.min.js"></script>
-    <script  type='text/javascript' src='https://cdn.goeasy.io/json2.js​'></script>
+    <script type='text/javascript' src='https://cdn.goeasy.io/json2.js​'></script>
     <%--goeasy--%>
     <script type="text/javascript" src="https://cdn.goeasy.io/goeasy-1.0.0.js​"></script>
 </head>
@@ -32,7 +33,8 @@
         <div class="collapse navbar-collapse">
             <ul class="nav navbar-nav navbar-right">
                 <li><a href="#">欢迎：<strong style="color: blue;">${sessionScope.admin.nickname}</strong></a></li>
-                <li><a href="#">安全退出 <strong class="glyphicon glyphicon-log-out"></strong></a></li>
+                <li><a href="${pageContext.request.contextPath}/admin/logout">安全退出 <strong
+                        class="glyphicon glyphicon-log-out"></strong></a></li>
             </ul>
         </div><!-- /.navbar-collapse -->
     </div><!-- /.container-fluid -->
@@ -107,6 +109,9 @@
                                 <li class="list-group-item">
                                     <a href="javascript:$('#content').load('${pageContext.request.contextPath}/back/articleView.jsp')">所有文章</a>
                                 </li>
+                                <li class="list-group-item">
+                                    <a href="javascript:$('#content').load('${pageContext.request.contextPath}/back/article-search.jsp')">全文搜索文章</a>
+                                </li>
                             </ul>
                         </div>
                     </div>
@@ -144,22 +149,55 @@
                                     明星管理
                                 </a>
                             </h4>
-                    </div>
-                    <!--身体-->
-                    <div id="collapseFive" class="panel-collapse collapse">
-                        <div class="panel-body">
-                            <!--列表组-->
-                            <ul class="list-group">
-                                <li class="list-group-item">
-                                    <a href="javascript:$('#content').load('${pageContext.request.contextPath}/back/starsView.jsp')">所有明星</a>
-                                </li>
-                            </ul>
+                        </div>
+
+                        <!--身体-->
+                        <div id="collapseFive" class="panel-collapse collapse">
+                            <div class="panel-body">
+                                <!--列表组-->
+                                <ul class="list-group">
+                                    <li class="list-group-item">
+                                        <a href="javascript:$('#content').load('${pageContext.request.contextPath}/back/starsView.jsp')">所有明星</a>
+                                    </li>
+                                </ul>
+                            </div>
                         </div>
                     </div>
+
+                    <%--管理员身份的才可以访问--%>
+                    <shiro:hasRole name="admin">
+                        <!--第六个面板:管理员管理-->
+                        <div class="panel panel-default">
+                            <!--头-->
+                            <div class="panel-heading" role="tab" id="headingSix">
+                                <h4 class="panel-title">
+                                    <a role="button" data-toggle="collapse" data-parent="#acc" href="#collapseSix">
+                                        管理员管理
+                                    </a>
+                                </h4>
+                            </div>
+
+                            <!--身体-->
+                            <div id="collapseSix" class="panel-collapse collapse">
+                                <div class="panel-body">
+                                    <!--列表组-->
+                                    <ul class="list-group">
+                                        <li class="list-group-item">
+                                            <a href="javascript:$('#content').load('${pageContext.request.contextPath}/back/userView.jsp')">所有用户</a>
+                                        </li>
+                                        <li class="list-group-item">
+                                            <a href="javascript:$('#content').load('${pageContext.request.contextPath}/back/userRegistView.jsp')">用户注册趋势</a>
+                                        </li>
+                                    </ul>
+                                </div>
+                            </div>
+                        </div>
+                    </shiro:hasRole>
+
+
                 </div>
             </div>
         </div>
-    </div>
 
         <%--右侧正文内容--%>
         <div class="col-sm-10" id="content">
@@ -171,7 +209,7 @@
             </div>
             <%--巨幕--%>
             <div class="jumbotron"
-            style="padding-left: 0px;padding-top: 0px;padding-right: 0px;padding-bottom: 0px">
+                 style="padding-left: 0px;padding-top: 0px;padding-right: 0px;padding-bottom: 0px">
                 <p><img src="${pageContext.request.contextPath}/statics/car.jpg"></p>
             </div>
         </div>

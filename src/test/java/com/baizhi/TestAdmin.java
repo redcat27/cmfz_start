@@ -3,6 +3,7 @@ package com.baizhi;
 import com.baizhi.controller.UserController;
 import com.baizhi.dao.AdminDao;
 import com.baizhi.service.BannerService;
+import org.apache.shiro.crypto.hash.Md5Hash;
 import org.junit.jupiter.api.Test;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.test.context.SpringBootTest;
@@ -108,5 +109,12 @@ public class TestAdmin {
        System.out.println("转成的字符串"+s);
    }
 
+
+    @Test
+    public void testMD5code() {
+        Md5Hash sky = new Md5Hash("123", "abcd", 1024);
+        String s = sky.toHex();
+        System.out.println(s);
+    }
 
 }
