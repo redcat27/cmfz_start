@@ -26,6 +26,9 @@ spring:
         max-wait: -1
   data:
     elasticsearch:
+      cluster-name: my-es
       cluster-nodes: 192.168.161.20:9300
+      repositories:
+        enabled: true
 mybatis:
   mapper-locations: com/baizhi/mapper/*.xml

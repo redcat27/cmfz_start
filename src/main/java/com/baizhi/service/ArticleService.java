@@ -2,6 +2,7 @@ package com.baizhi.service;
 
 import com.baizhi.entity.Article;
 
+import java.util.List;
 import java.util.Map;
 
 public interface ArticleService {
@@ -17,4 +18,6 @@ public interface ArticleService {
 
     //删除
     void delete(String id);
+
+    List<Article> search(String content);
 }

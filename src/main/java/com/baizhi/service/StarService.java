@@ -15,4 +15,5 @@ public interface StarService {
     Map<String, Object> upload(Star star, MultipartFile photo, HttpServletRequest request);
 
     Map<String, Object> findAllOnlyStarName();
+
 }
